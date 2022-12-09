@@ -1,0 +1,86 @@
+@import "./colors.css";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
+
+/* Reset */
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.App {
+  background-color: var(--app-bg);
+  height: 100vh;
+}
+
+.App .main-title {
+  text-align: center;
+  color: var(--white);
+  text-transform: uppercase;
+  padding: 10px 20px;
+  background-color: var(--dark-bg);
+  font-weight: 800;
+}
+
+.App .app-container {
+  padding: 10px 40px;
+}
+
+/* Radar styles */
+.radar-wrapper .color-info-wrapper {
+  display: flex;
+}
+
+.radar-wrapper .color-info-wrapper .color-info .radar {
+  border: 1px solid var(--border-color);
+  background-color: var(--dark-bg);
+  border-radius: 10px;
+}
+
+.radar-wrapper .color-info-wrapper .radar-info {
+  color: var(--title-color);
+  font-size: 12px;
+}
+
+.radar-wrapper .color-info-wrapper .color-info {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.radar-wrapper .color-info-wrapper .color-info .color {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.radar-wrapper .color-info-wrapper .color-info .color.red {
+  background-color: var(--violating);
+}
+
+.radar-wrapper .color-info-wrapper .color-info .color.green {
+  background-color: var(--nest);
+}
+
+.radar-wrapper .color-info-wrapper .color-info .color.yellow {
+  background-color: var(--non-violating);
+}
+
+.radar-wrapper .color-info-wrapper .color-info .color.orange {
+  background-color: var(--ndz);
+}
+
+.radar-wrapper .color-info-wrapper .color-info .info {
+  color: var(--white);
+  font-size: 14px;
+}
