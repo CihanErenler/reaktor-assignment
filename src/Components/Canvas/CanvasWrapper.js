@@ -25,7 +25,7 @@ const CanvasWrapper = ({ children }) => {
 				</div>
 			</div>
 			{children}
-			{drones ? <p className="radar-info">{drones.timeStamp}</p> : ""}
+			<p className="radar-info">{drones ? drones.timeStamp : "Loadong..."}</p>
 		</div>
 	);
 };
