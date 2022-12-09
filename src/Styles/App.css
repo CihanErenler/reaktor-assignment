@@ -33,18 +33,31 @@ body {
   padding: 10px 40px;
 }
 
+.App .app-container .app-layout {
+  display: flex;
+}
+
+.App .app-container .distance-title {
+  color: var(--white);
+  background-color: var(--danger);
+  border: 1px solid var(--ndz);
+  margin-bottom: 20px;
+  padding: 6px 20px;
+  border-radius: 10px;
+}
+
 /* Radar styles */
 .radar-wrapper .color-info-wrapper {
   display: flex;
 }
 
-.radar-wrapper .color-info-wrapper .color-info .radar {
+.radar-wrapper .radar {
   border: 1px solid var(--border-color);
   background-color: var(--dark-bg);
   border-radius: 10px;
 }
 
-.radar-wrapper .color-info-wrapper .radar-info {
+.radar-wrapper .radar-info {
   color: var(--title-color);
   font-size: 12px;
 }
