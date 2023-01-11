@@ -1,6 +1,7 @@
 import React from "react";
 import Canvas from "./Canvas/Canvas";
 import CanvasWrapper from "./Canvas/CanvasWrapper";
+import ViolationList from "./ViolationList/ViolationList";
 
 const AppLayout = () => {
   return (
@@ -13,6 +14,7 @@ const AppLayout = () => {
       </div>
       <div>
         <h1>Violations</h1>
+        <ViolationList />
       </div>
     </section>
   );
