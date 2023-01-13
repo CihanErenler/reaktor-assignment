@@ -1,74 +1,67 @@
 import React, { useState, useEffect, useContext } from "react";
-import detectViolation from "../Helpers/detectViolation";
 import io from "socket.io-client";
 
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const [socket, setSocket] = useState(null);
-  const [drones, setDrones] = useState(null);
-  const [violatingPilots, setViolatingPilots] = useState([]);
+	const [socket, setSocket] = useState(null);
+	const [drones, setDrones] = useState(null);
+	const [violatingPilots, setViolatingPilots] = useState([]);
 
-  useEffect(() => {
-    const newSocket = io("http://localhost:3002");
-    setSocket(newSocket);
+	const fetchRecents = async () => {
+		try {
+			const response = await fetch(process.env.REACT_APP_API_URL);
+			const jsonData = await response.json();
+			setViolatingPilots(jsonData.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-    newSocket.on("connection", () => {
-      console.log("Connected to socket");
-    });
+	useEffect(() => {
+		fetchRecents();
+	}, []);
 
-    newSocket.on("drone-data", (data) => {
-      console.log(data);
-      setDrones(data);
-    });
+	useEffect(() => {
+		const newSocket = io("http://localhost:3002");
+		setSocket(newSocket);
 
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
+		const handleViolation = (data) => {
+			const tempState = [...violatingPilots];
+			const newState = data.concat(tempState);
 
-  // useEffect(() => {
-  //   const fetchPilotInfo = async (violations) => {
-  //     const url = `${process.env.REACT_APP_BASE_URL}/birdnest/pilots`;
-  //     try {
-  //       const calls = violations.map((v) => {
-  //         const serialNumber = v.serialNumber;
-  //         return axios.get(`${url}/${serialNumber}`);
-  //       });
+			const arrayUniqueByKey = [
+				...new Map(newState.map((item) => [item["pilotId"], item])).values(),
+			];
+			// arrayUniqueByKey.sort(function)
+			console.log(arrayUniqueByKey);
+			setViolatingPilots(arrayUniqueByKey);
+		};
 
-  //       // make multiple calls
-  //       axios.all(calls).then(
-  //         axios.spread((...response) => {
-  //           const tempForm = response.map((res) => res.data);
-  //           const finalForm = [...violatingPilots, ...tempForm];
-  //           let uniqueObjArray = [
-  //             ...new Map(
-  //               finalForm.map((item) => [item["pilotId"], item])
-  //             ).values(),
-  //           ];
-  //           setViolatingPilots(uniqueObjArray);
-  //         })
-  //       );
-  //     } catch (error) {
-  //       throw new Error(error);
-  //     }
-  //   };
+		newSocket.on("connection", () => {
+			console.log("Connected to socket");
+		});
 
-  //   if (drones) {
-  //     const violations = detectViolation(drones);
-  //     if (violations.length > 0) {
-  //       fetchPilotInfo(violations);
-  //     }
-  //   }
-  // }, [drones]);
+		newSocket.on("drone-data", (data) => {
+			setDrones(data);
+		});
 
-  return (
-    <AppContext.Provider value={{ drones, setDrones, violatingPilots }}>
-      {children}
-    </AppContext.Provider>
-  );
+		newSocket.on("violation", (data) => {
+			handleViolation(data);
+		});
+
+		return () => {
+			newSocket.disconnect();
+		};
+	}, [violatingPilots]);
+
+	return (
+		<AppContext.Provider value={{ drones, setDrones, violatingPilots }}>
+			{children}
+		</AppContext.Provider>
+	);
 };
 
 export const useAppContext = () => {
-  return useContext(AppContext);
+	return useContext(AppContext);
 };
