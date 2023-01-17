@@ -4,6 +4,7 @@ import io from "socket.io-client";
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
+	// eslint-disable-next-line no-unused-vars
 	const [socket, setSocket] = useState(null);
 	const [drones, setDrones] = useState(null);
 	const [violatingPilots, setViolatingPilots] = useState([]);
