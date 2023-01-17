@@ -71,6 +71,12 @@ body {
 	font-weight: 800;
 }
 
+.App .app-container .app-layout > div:nth-child(1) .closest-distance > p {
+	text-align: center;
+	padding-top: 4px;
+	color: var(--title-color);
+}
+
 .App .app-container .app-layout > div:nth-child(2) {
 	flex: 1;
 	display: flex;

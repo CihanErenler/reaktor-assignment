@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		const newSocket = io("http://localhost:3002");
+		const newSocket = io(process.env.REACT_APP_SOCKET_URL);
 		setSocket(newSocket);
 
 		newSocket.on("connection", () => {
