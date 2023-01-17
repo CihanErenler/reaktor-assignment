@@ -22,7 +22,11 @@ const AppLayout = () => {
 					<h2 className="distance-title">
 						Closest confired distance to nest:{" "}
 					</h2>
-					{closestDistance ? <span>{distance.toFixed(3)}m</span> : "Loading..."}
+					{closestDistance ? (
+						<span>{distance.toFixed(3)}m</span>
+					) : (
+						<p>Loading...</p>
+					)}
 				</div>
 			</div>
 			<div className="violation-wrapper">
