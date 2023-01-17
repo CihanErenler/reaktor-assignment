@@ -9,7 +9,7 @@ const AppLayout = () => {
 	let distance;
 
 	if (closestDistance) {
-		distance = closestDistance / 1000;
+		distance = Number(closestDistance) / 1000;
 	}
 
 	return (
