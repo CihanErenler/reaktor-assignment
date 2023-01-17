@@ -65,11 +65,7 @@ export const AppProvider = ({ children }) => {
 			setClosestDistance(data[0].distanceToNest);
 			setClosestDistanceLoading(false);
 		});
-
-		return () => {
-			newSocket.disconnect();
-		};
-	}, [violatingPilots]);
+	}, []);
 
 	return (
 		<AppContext.Provider
