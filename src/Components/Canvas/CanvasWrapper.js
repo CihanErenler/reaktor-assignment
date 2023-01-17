@@ -8,7 +8,7 @@ const CanvasWrapper = ({ children }) => {
 		<div className="radar-wrapper">
 			<section className="radar-info-wrapper">
 				{children}
-				<p className="radar-info">{drones ? drones.timeStamp : "Loadong..."}</p>
+				<p className="radar-info">{drones ? drones.timeStamp : "Loading..."}</p>
 			</section>
 			<div className="color-info-wrapper">
 				<div className="color-info">
