@@ -8,7 +8,8 @@ export const AppProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [drones, setDrones] = useState(null);
 	const [violatingPilots, setViolatingPilots] = useState([]);
-	const [closestDistance, setClosestDıstance] = useState(null);
+	const [closestDistance, setClosestDistance] = useState(null);
+	const [closestDistanceLoading, setClosestDistanceLoading] = useState(false);
 
 	const fetchRecents = async () => {
 		try {
@@ -22,11 +23,15 @@ export const AppProvider = ({ children }) => {
 
 	const fetchClosestDistance = async () => {
 		try {
+			setClosestDistanceLoading(true);
 			const response = await fetch(`${process.env.REACT_APP_API_URL}/drone`);
 			const jsonData = await response.json();
-			console.log(jsonData);
-			if (jsonData.data.length > 0)
-				setClosestDıstance(jsonData.data[0].distanceToNest);
+			if (jsonData.data.length > 0) {
+				setClosestDistance(jsonData.data[0].distanceToNest);
+				setClosestDistanceLoading(false);
+			} else {
+				setClosestDistanceLoading(false);
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -34,6 +39,9 @@ export const AppProvider = ({ children }) => {
 
 	useEffect(() => {
 		fetchRecents();
+	}, []);
+
+	useEffect(() => {
 		fetchClosestDistance();
 	}, []);
 
@@ -54,7 +62,8 @@ export const AppProvider = ({ children }) => {
 		});
 
 		newSocket.on("closestDistance", (data) => {
-			setClosestDıstance(data);
+			setClosestDistance(data[0].distanceToNest);
+			setClosestDistanceLoading(false);
 		});
 
 		return () => {
@@ -64,7 +73,13 @@ export const AppProvider = ({ children }) => {
 
 	return (
 		<AppContext.Provider
-			value={{ drones, setDrones, violatingPilots, closestDistance }}
+			value={{
+				drones,
+				setDrones,
+				violatingPilots,
+				closestDistance,
+				closestDistanceLoading,
+			}}
 		>
 			{children}
 		</AppContext.Provider>

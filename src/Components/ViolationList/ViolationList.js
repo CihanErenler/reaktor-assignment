@@ -30,7 +30,7 @@ const ViolationList = () => {
 						{violatingPilots.map((pilot, index) => {
 							return (
 								<ViolationItem
-									key={pilot.pilotId}
+									key={index}
 									{...pilot}
 									index={index}
 									timeStamp={timeStamp}

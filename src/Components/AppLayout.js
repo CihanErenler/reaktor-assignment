@@ -5,7 +5,7 @@ import ViolationList from "./ViolationList/ViolationList";
 import { useAppContext } from "../Context/AppContext";
 
 const AppLayout = () => {
-	const { closestDistance } = useAppContext();
+	const { closestDistance, closestDistanceLoading } = useAppContext();
 	let distance;
 
 	if (closestDistance) {
@@ -22,10 +22,12 @@ const AppLayout = () => {
 					<h2 className="distance-title">
 						Closest confired distance to nest:{" "}
 					</h2>
-					{closestDistance ? (
-						<span>{distance.toFixed(3)}m</span>
-					) : (
+					{closestDistanceLoading ? (
 						<p>Loading...</p>
+					) : (
+						<span>
+							{closestDistance ? `${distance.toFixed(3)}m` : "No data to show"}
+						</span>
 					)}
 				</div>
 			</div>
