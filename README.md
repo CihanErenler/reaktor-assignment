@@ -1,3 +1,3 @@
 ### Reaktor assignment app
 
-This repository contains the solution of reaktor assignment
+This repository contains the solution of Reaktor assignment
