@@ -222,7 +222,7 @@ body {
 }
 
 .violation-table tr.new-added {
-	animation: fade-in ease 2s;
+	animation: fade-in ease 3s;
 }
 
 @keyframes fade-in {

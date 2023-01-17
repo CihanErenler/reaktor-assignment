@@ -8,7 +8,7 @@ const ViolationList = () => {
 
 	useEffect(() => {
 		if (violatingPilots.length > 0) {
-			setTimeStamp(violatingPilots[0].createdAt);
+			setTimeStamp(new Date().getTimezoneOffset());
 		}
 	}, [violatingPilots]);
 

@@ -24,7 +24,7 @@ const ViolationItem = ({
 	};
 
 	return (
-		<tr className={new Date(timeStamp) - date < 2000 ? "new-added" : ""}>
+		<tr className={Date.now() - date.getTime() < 5000 ? "new-added" : ""}>
 			<td className="index">{index + 1}</td>
 			<td>
 				{firstName} {lastName}
