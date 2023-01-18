@@ -6,9 +6,11 @@ const CanvasWrapper = ({ children }) => {
 	const { drones } = useAppContext();
 
 	useEffect(() => {
-		const currentTime = new Date(drones.timeStamp).getTime();
-		const updatedTime = new Date(currentTime + 2 * 60 * 60 * 1000); // add 2 hours to time stamp to match curremt time
-		setTimeStamp(updatedTime);
+		if (drones) {
+			const currentTime = new Date(drones.timeStamp).getTime();
+			const updatedTime = new Date(currentTime + 2 * 60 * 60 * 1000); // add 2 hours to time stamp to match curremt time
+			setTimeStamp(updatedTime);
+		}
 	}, [drones]);
 
 	return (
