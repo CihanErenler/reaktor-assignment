@@ -1,14 +1,21 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../../Context/AppContext";
 
 const CanvasWrapper = ({ children }) => {
+	const [timeStamp, setTimeStamp] = useState(null);
 	const { drones } = useAppContext();
+
+	useEffect(() => {
+		const currentTime = new Date(drones.timeStamp).getTime();
+		const updatedTime = new Date(currentTime + 2 * 60 * 60 * 1000); // add 2 hours to time stamp to match curremt time
+		setTimeStamp(updatedTime.toLocaleTimeString());
+	}, [drones]);
 
 	return (
 		<div className="radar-wrapper">
 			<section className="radar-info-wrapper">
 				{children}
-				<p className="radar-info">{drones ? drones.timeStamp : "Loading..."}</p>
+				<p className="radar-info">{drones ? timeStamp : "Loading..."}</p>
 			</section>
 			<div className="color-info-wrapper">
 				<div className="color-info">

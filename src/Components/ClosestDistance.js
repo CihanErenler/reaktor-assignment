@@ -11,12 +11,16 @@ const ClosestDistance = () => {
 
 	return (
 		<div className="closest-distance">
-			<h2 className="distance-title">Closest confired distance to nest: </h2>
+			<h2 className="distance-title">
+				The closest confired distance to nest:{" "}
+			</h2>
 			{closestDistanceLoading ? (
 				<p>Loading...</p>
 			) : (
 				<span>
-					{closestDistance ? `${distance.toFixed(1)} m` : "No data to show"}
+					{closestDistance
+						? `${distance.toFixed(1)} meters`
+						: "No data to show"}
 				</span>
 			)}
 		</div>
